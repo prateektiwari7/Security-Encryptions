@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+ <title>Encryption/decryption RSA/AES</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/encoding.js"></script>
+<script src="/js/encoding-indexes.js"></script>
+<script src="/js/converter-wrapper.js"></script>
+<script src="/js/rsa-wrapper.js"></script>
+<script>
+ var socket = io();
+</script>
+
+<div class="container">
+    <div class="text-container">
+    <h2>Server public key</h2>
+    <textarea id="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkynCbQaNsRz9PB5OW4zGTzWULlf93J+Xi/beU7J+uTP+tFAYr2cumTbOpOawiBYGJcsj/P/PQ3/oEVoLpaFMQAF+L1a7QWQuw6jjhJ9vcKIRJSEo9FR5GBbSZFOULI3lOlRGiK/4swx4WWV1g3tuiGYmsiSjYYMkRxYF38VPvpoq98e0CXsMxDO7gL4rM6Sg/TXjkCDfUmIIHFLStfce32mNy0cGNizKCuiwCkjxQFYp5BwMxxn8OJ0hSUDl9Wqzs3gTM3KisdZFpsC0uaHxSI7frM7euXel+YQ9rYuegGIgxrqrmfGtK3keqDRAkuUSI414DZ1qOj2bJqIFQJ4nBwIDAQAB"></textarea>
+    </div>
+    <div class="text-container">
+    <h2>Client public key</h2>
+    <textarea id="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApIzzlO+WV9yfyvYDwYgpgF97HgCwcQVaQxDTatBhcTBupjpq57iw6p9WhuRKnSj6OQbAfFBJuA5N7baeaiK4AcKQ2QhcAqLWFJsNk8BqOnQkmnq/rYbWi/ldstP3TsAmPdr4vhvawnNTZqSEYAGKk6MhBxdsxHfaZhlsJIn/VhN7yJOuUHf+ht+wZOfDMIptnN0R7aJ5VvNQOdRtnGIV98DZD/5u7pzSvuFlHzqEDjSmZvq2dKpxmHIHLp+PEKMiLI6B9Ncjk3hDykdLqFBaBa8ESHvDMwjrBK1QSlgMFb5RqGqJlebjnuEvvZlHpKohv7MKhU/jH28ZSdB7sooprwIDAQAB"></textarea>
+    </div>
+    <div class="text-container">
+    <h2>Client private key</h2>
+    <textarea id="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkjPOU75ZX3J/K9gPBiCmAX3seALBxBVpDENNq0GFxMG6mOmrnuLDqn1aG5EqdKPo5BsB8UEm4Dk3ttp5qIrgBwpDZCFwCotYUmw2TwGo6dCSaer+thtaL+V2y0/dOwCY92vi+G9rCc1NmpIRgAYqToyEHF2zEd9pmGWwkif9WE3vIk65Qd/6G37Bk58Mwim2c3RHtonlW81A51G2cYhX3wNkP/m7unNK+4WUfOoQONKZm+rZ0qnGYcgcun48QoyIsjoH01yOTeEPKR0uoUFoFrwRIe8MzCOsErVBKWAwVvlGoaomV5uOe4S+9mUekqiG/swqFT+MfbxlJ0HuyiimvAgMBAAECggEAA+RJhoY8Ggvfw58Z66Pax2x6rvT5N1MXFWr6dRZEl7a7hzbufFiD5qiqFTqlAR6M/HhKaSZE+BNuiGa/TGdRzsjZQCjQdEeBpK8eHRZ57LP+gaDRk7sSq/DT5Hza5oPo46GgLG7gN6UendjaQKMIsgEzsMU/D05+XdfQFPUmktSNTCha9NB9L6jtI8m3l40XjQSOty7zwTpbiy0l7BR048ubefdGtLKu2QBqUMpeqQUS20Rhn4x3Ny7utRbgTyBAYiHpHLuwhKa2b2YUyUdphbPLr/xhnj3VTXHNhn2qAD5D/oI0ZTst4sxnazcrOCgnwyS8/RfTj7JPWmriVc9o0QKBgQDxwZb9WUPNjBq9q4irU6HOMiJAwh5axze2hSrw+Yb3yA7u3tzo7q5lhM8Tglu01AherGj7MVUOTvxsyNxDXtHr7CqDRuDOYudFyCIZQofcXWkHuZudmIdMDrK50BzcHslbe2ZcnYiMr8i8qB5lCZB9Yq/olJZZLoKKUfRd9YQKHQKBgQCuPt5yq/tgMOx0bEPHYpOMPXUpvT5EMEBDPPiVNSBTU543OkF0KqTW+26XcSeSN+eX8N44IvJ+wv5f7UOPaQ2982B8bRYq2iYeXJGDGhtE/PLYlsq9x4VUbV+Bnl7H7anwbre4yjGPwM1uMSFLwoMHPt7GeAW8Opt0wKghlmsZOwKBgEvKh02R6KHOJKwF1OjxZS7BpN9sfBu1jQ/Zm+bEM74GqDfXAqa7/UyyYEEbgyijuKQFpTvq8WF0/coVBojQdzthZMqXM+9ALoVAAwCsTO+XEVBsrg6wPOppSTrbtdCEjlfxzduHP8HrciFDC5RddUD56XAe9SusWxyGKPgz+ls5AoGBAKHqE8VVIOLSs3a///+wD1Ga7luZ2dl9SMnyR0BHPMGRiwzg2l+7HLAUtkCNymqp/lAHaEeb2eCHC99R15zUzws6s+cLazTov9EozaKYyMxDjNpMzRqq469/budApex8YZTlHV3erU1aqMqDZuBCYIWEG3kroJC3mStVtyZ24xBvAoGAUrWp3eg6tRhWgoMDlHthznXoXFnxnWzdNZ5MGRmAEH8s46qMnWKMeSrzAICVfBAig7L2/dqapo9RUtbgQR7Iw4oFhzhDYkSBd4GiyHdlKsu8UQYD7Xf/fumtxjYe0cXj7pkyab/ZQv+zCEldgawqyzfPqngUjOEPKn5iInt7Mcw="></textarea>
+    </div>
+    <div style="clear: botj"></div>
+    </div>
+    <div class="log-container">
+    <h1>Log container</h1>
+    <div id="log" style="padding-top: 20px"></div>
+    </div>
+
+
+
+
+</body>
+</html>
